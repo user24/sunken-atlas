@@ -4,8 +4,8 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Forbidden Map Maker',
-  description: 'Alternate tile layouts for forbidden island',
+  title: 'Forbidden Island Editor',
+  description: 'Alternate tile layouts for the Forbidden Island board game',
 }
 
 export default function RootLayout({ children }) {

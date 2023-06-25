@@ -12,8 +12,8 @@
         padding: 5px;
     }
     &.small {
-        width: 25%;
-        padding-bottom: 25%;
+        width: 80px;
+        padding-bottom: 80px;
     }
 }
 
@@ -25,11 +25,11 @@
 .tile {
     margin-right: 1px;
     margin-bottom: 1px;
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     &.small {
-        width: 7px;
-        height: 7px;    
+        width: 9px;
+        height: 9px;
     }
 }
 
