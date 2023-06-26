@@ -2,7 +2,7 @@ import styles from './Island.module.css';
 
 import { island2String } from '@/utils/islandParser/islandParser';
 
-const Island = ({editable, tiles, size,  name, toggleTile}) => {
+const Island = ({editable, tiles, size,  isLink, name, toggleTile}) => {
   const sumTiles = tiles.reduce((length, row) => length + row.filter(cell => cell === 1).length, 0);
   const validLength = sumTiles <= 24;
   const code = island2String(tiles);

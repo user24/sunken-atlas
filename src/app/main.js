@@ -1,21 +1,20 @@
-import styles from './page.module.css'
+import styles from './main.module.css'
 import Island from './Island';
 import { string2island } from '@/utils/islandParser/islandParser';
 import islands from './data/islands.json';
 
-const tiles = string2island('gs9R9sX');
-
-export default function Home() {
+export default function Main({islandString='gs9R9sX'}) {
+  const tiles = string2island(islandString);
   return (
     <>
       <div className={styles.wrapper}>
         <main className={styles.main}>
-          <h1>Forbidden Island Editor</h1>
+          <h1 className={styles.h1}>Forbidden Island Map Editor</h1>
           <Island tiles={tiles} />
           Share: <input type='text' />
-          <h2 className='h2'>Explore the Islands</h2>
+          <h2 className={styles.h2}>Explore other islands</h2>
           <div className={styles.islandPreviews}>
-            {islands.map((island => <Island size='s' tiles={island.tiles} />))}
+            {islands.map((island => <Island size='s' isLink={true} tiles={island.tiles} />))}
           </div>
         </main>
       </div>
