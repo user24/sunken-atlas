@@ -1,4 +1,9 @@
-const ALPHABET = 'abcdefghijklmnopqrstuvwxyz-_ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+const ALPHABET = 'aeiouAEIOUbcdfghjklmnpqrstvwxyz_-BCDFGHJKLMNPQRSTVWXYZ0123456789';
+
+if (ALPHABET.length < 64) {
+  throw new Error('Alphabet not long enough to encode 6 bits');
+}
+
 
 const _char2bin = (char) => {
   return ('000000' + ALPHABET.indexOf(char).toString(2)).slice(-6);
