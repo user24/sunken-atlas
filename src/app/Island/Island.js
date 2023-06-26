@@ -1,5 +1,4 @@
 import styles from './Island.module.css';
-
 import React from 'react';
 import Link from 'next/link';
 import { island2String } from '@/utils/islandParser/islandParser';
