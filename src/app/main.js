@@ -38,10 +38,13 @@ export default function Main({islandString='', loading}) {
         <div className={classes.welcome}>Alternate layouts &amp; map editor for Forbidden Island</div>
         <Island tiles={tiles} />
         {loading && islandString ? null : (
-          <div className={classes.share}>
-            <input className={classes.shareBox} type='text' value={link} readOnly onClick={selectMe} />
-            <button className={classes.shareButton} onClick={copy}>{copyLabel}</button>
-          </div>
+          <>
+            <h2 className={classes.h2}>Share this island</h2>
+            <div className={classes.share}>
+              <input className={classes.shareBox} type='text' value={link} readOnly onClick={selectMe} />
+              <button className={classes.shareButton} onClick={copy}>{copyLabel}</button>
+            </div>
+          </>
         )}
         <h2 className={classes.h2}>Explore other islands</h2>
         <div className={classes.islandPreviews}>
