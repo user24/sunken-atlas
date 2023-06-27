@@ -1,5 +1,6 @@
 .wrapper {
-    width: 500px;
+    width: 450px;
+    padding: 25px;
     margin: auto;
     margin-top: 40px;
     margin-bottom: 40px;
@@ -9,14 +10,42 @@
     /* https://mycolor.space/gradient3 */
     /* background-image: linear-gradient(to top, #4dc5d6, #62cdc6, #82d3b4, #a4d6a5, #c6d89d, #d4d08d, #e4c682, #f4bb7d, #f9a36b, #fd8862, #fe6a63, #fc466b); */
 }
+.welcome {
+    text-align: right;
+    color: #dee0d5;
+    margin-bottom: 20px;
+}
 
 .main {
-    padding: 20px;
     .h1 {
         text-align: center;
+        letter-spacing: 1pt;
+        margin: 10px 0;
+        font-weight: normal;
+        font-size: 40pt;
+        color: #dee0d5;
+        margin-bottom: -10px;
     }
     .h2 {
         color: #333;
+    }
+    .share {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+    .shareBox {
+        flex: 1;
+        padding: 0;
+        margin: 0;
+        padding-left: 8px;
+        margin-right: 10px;
+    }
+    .shareButton, .shareBox {
+        background: rgba(255,255,255,0.3);
+        border: 1px solid black;
+        height: 30px;
+        cursor: pointer;
     }
 }
 .islandPreviews {

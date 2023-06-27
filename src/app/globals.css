@@ -2,7 +2,5 @@ body {
   background: #333;
   margin: 0;
   box-sizing: border-box;
-}
-h1 {
-  color: #dee0d5;
+  font-size: 14pt;
 }

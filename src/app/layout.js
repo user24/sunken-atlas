@@ -1,17 +1,18 @@
 import './globals.css';
-import { Inter } from 'next/font/google';
+import { Macondo as Font } from 'next/font/google';
+
+const font = Font({
+  subsets: ['latin'],
+  weight: ['400']
+});
 
 export const metadata = {
   title: 'Forbidden Island Map Editor',
   description: 'Alternate tile layouts for the Forbidden Island board game',
 };
 
-const inter = Inter({ subsets: ['latin'] });
-
 export default function Layout({ children }) {
   return (
-    <>
-      <div className={inter.className}>{children}</div>
-    </>
+      <div className={font.className}>{children}</div>
   )
 }
