@@ -29,7 +29,7 @@
     .h2 {
         font-size: 16pt;
         color: #333;
-        margin-top: 40px;
+        margin-top: 0;
         margin-bottom: 10px;
     }
     .share {
@@ -38,10 +38,18 @@
         align-items: center;
         justify-content: space-between;
         vertical-align: auto;
+        margin-bottom: 30px;
     }
     .shareBox {
         flex: 1;
         margin-right: 10px;
+    }
+    .tileWarning {
+        margin-top: 5px;
+        text-align: right;
+    }
+    .tileWarning:after{
+        content: '\200b';
     }
 }
 .islandPreviews {
