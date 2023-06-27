@@ -3,7 +3,7 @@ import Island from './Island';
 import { string2island } from '@/utils/islandParser/islandParser';
 import islands from './data/islands.json';
 
-const hostname = 'https://localhost';
+const hostname = 'https://sunkenatlas.com';
 
 export default function Main({islandString='', loading}) {
   const tiles = string2island(islandString);
@@ -11,7 +11,7 @@ export default function Main({islandString='', loading}) {
   return (
     <div className={styles.wrapper}>
       <main className={styles.main}>
-        <h1 className={styles.h1}>Forbidden Island Map Editor</h1>
+        <h1 className={styles.h1}>Sunken Atlas</h1>
         <Island tiles={tiles} />
         {loading && islandString ? null : <>Share: <input type='text' value={link} readOnly /></>}
         <h2 className={styles.h2}>Explore other islands</h2>
