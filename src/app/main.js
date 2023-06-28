@@ -65,7 +65,7 @@ export default function Main({islandString='', loading}) {
     <div className={classes.wrapper}>
       <main className={classes.main}>
         <h1 className={[font.className, classes.h1].join(' ')}>The Sunken Atlas</h1>
-        <div className={classes.welcome}>Alternate layouts &amp; map editor for Forbidden Island</div>
+        <div className={classes.welcome}>Forbidden Island alternate layouts &amp; map editor</div>
         <Island editable toggleTile={toggleTile} tiles={tiles} />
         <div className={classes.tileWarning}>{getTileNumberWarning()}</div>
         {loading && islandString ? null : (
