@@ -79,11 +79,13 @@ export default function Main({islandString='', loading}) {
             </div>
           </>
         )}
+      </main>
+      <section className={classes.islands}>
         <h2 className={classes.h2}>Explore other islands</h2>
         <div className={classes.islandPreviews}>
           {islands.map((island => <Island size='s' isLink={true} tiles={island.tiles} key={island.tiles} />))}
         </div>
-      </main>
+      </section>
     </div>
   )
 }
