@@ -4,6 +4,7 @@ import Island from './Island';
 import { string2island, island2String } from '@/utils/islandParser/islandParser';
 import islands from './data/islands.json';
 import { IM_Fell_English_SC as Font } from 'next/font/google';
+import Link from 'next/link';
 
 const font = Font({
   subsets: ['latin'],
@@ -14,18 +15,20 @@ const hostname = 'https://sunkenatlas.com';
 
 export default function Main({islandString='', loading}) {
 
-  const [copyLabel, setCopyLabel] = useState('Copy');
+  const copyLabels = ['Copy', 'Copied'];
+
+  const [copyLabel, setCopyLabel] = useState(copyLabels[0]);
   const [editString, setEditString] = useState(islandString);
   const tiles = string2island(editString);
-  
-  const getLink = () => {
-    return `https://sunkenatlas.com/i/${editString}`;
-  };
+  const link = `${hostname}/i/${editString}`;
 
   useEffect(() => {
-    setCopyLabel('Copy');
     setEditString(islandString);
   }, [islandString]);
+
+  useEffect(() => {
+    setCopyLabel(copyLabels[0]);
+  }, [editString]);
 
   const selectMe = (e) => {
     e.target.select();
@@ -33,7 +36,7 @@ export default function Main({islandString='', loading}) {
 
   const copy = () => {
     navigator.clipboard.writeText(link);
-    setCopyLabel('Copied');
+    setCopyLabel(copyLabels[1]);
   }
 
   const toggleTile = (x, y) => {
@@ -41,7 +44,6 @@ export default function Main({islandString='', loading}) {
     newTiles[y][x] = newTiles[y][x] ? 0 : 1;
     //newIsland.name = getIslandName(editingIsland.code);
     setEditString(island2String(newTiles));
-    // window.history.pushState({}, '', '?i='+newIsland.code);
   };
 
   const getTileNumberWarning = () => {
@@ -64,7 +66,7 @@ export default function Main({islandString='', loading}) {
   return (
     <div className={classes.wrapper}>
       <main className={classes.main}>
-        <h1 className={[font.className, classes.h1].join(' ')}>The Sunken Atlas</h1>
+        <h1 className={[font.className, classes.h1].join(' ')}><Link href='/'>The Sunken Atlas</Link></h1>
         <div className={classes.welcome}>Forbidden Island alternate layouts &amp; map editor</div>
         <Island editable toggleTile={toggleTile} tiles={tiles} />
         <div className={classes.tileWarning}>{getTileNumberWarning()}</div>
@@ -72,7 +74,7 @@ export default function Main({islandString='', loading}) {
           <>
             <h2 className={classes.h2}>Share this island</h2>
             <div className={classes.share}>
-              <input className={classes.shareBox} type='text' value={getLink()} readOnly onClick={selectMe} />
+              <input className={classes.shareBox} type='text' value={link} readOnly onClick={selectMe} />
               <button className={classes.shareButton} onClick={copy}>{copyLabel}</button>
             </div>
           </>

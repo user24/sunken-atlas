@@ -4,6 +4,10 @@ body {
   box-sizing: border-box;
   font-size: 14pt;
 }
+h1 > a {
+  text-decoration: inherit;
+  color: inherit;
+}
 
 input, button {
   border: 1px solid rgba(255,255,255,0.4);
