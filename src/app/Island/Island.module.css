@@ -2,6 +2,7 @@
     height: 450px;
     width: 450px;
 
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,10 +12,10 @@
     > .inner {
         padding: 5px;
     }
-    &.small {
-        width: 80px;
-        height: 80px;
-    }
+}
+.editor.small {
+    width: 80px;
+    height: 80px;
 }
 
 .tileRow {
@@ -27,11 +28,15 @@
     margin-right: 1px;
     width: 50px;
     height: 50px;
-    &.small {
-        width: 9px;
-        height: 9px;
-    }
 }
+.tile.small {
+    width: 7px;
+    height: 7px;
+}
+.editor:not(.small) .tile:hover {
+    outline: 1px solid #666;
+}
+
 
 .filled {
     background: #8F425B;

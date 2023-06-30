@@ -1,30 +1,49 @@
 .wrapper {
     width: 950px;
     display: flex;
-    justify-content: space-around;
-    padding: 25px;
+    justify-content: center;
     margin: auto;
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     border-radius: 20px;
     border: 3px solid #dee0d5;
     /* https://mycolor.space/gradient3 */
     background-image: linear-gradient(to bottom, #402643, #773958, #af4f5f, #dd715a, #f99f4e, #eab948, #d2d354, #40d3c9, #50c6d3);
     /* background-image: linear-gradient(to top, #4dc5d6, #62cdc6, #82d3b4, #a4d6a5, #c6d89d, #d4d08d, #e4c682, #f4bb7d, #f9a36b, #fd8862, #fe6a63, #fc466b); */
 }
-@media screen and (min-width: 1024px) {
-    .islands {
-        width: 45%;
-        border-left: 3px solid #dee0d5;
-        padding-left: 20px;
-        margin-top: 20px;
-    }
-}
 @media screen and (max-width: 1023px) {
     .wrapper {
         width: 450px;
         display: block;
     }
+    .main, .islands {
+        width: 430px;
+        padding: 10px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .main, .islands {
+        width: 450px;
+        padding: 10px;
+    }
+    .islands {
+        border-left: 3px solid #dee0d5;
+        margin-top: 21px;
+    }
+}
+.islands {
+    text-align: center;
+}
+.islands .h2 {
+    color: #dee0d5;
+    font-weight: normal;
+}
+.islandPreviews {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    column-gap: 10px;
 }
 .welcome {
     text-align: right;
@@ -32,45 +51,37 @@
     margin-bottom: 10px;
 }
 
-.main {
-    .h1 {
-        text-align: center;
-        letter-spacing: 1pt;
-        margin: 10px 0;
-        font-weight: normal;
-        font-size: 40pt;
-        color: #dee0d5;
-        margin-bottom: -10px;
-    }
-    .h2 {
-        font-size: 16pt;
-        color: #333;
-        margin-top: 0;
-        margin-bottom: 10px;
-    }
-    .share {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        vertical-align: auto;
-        margin-bottom: 30px;
-    }
-    .shareBox {
-        flex: 1;
-        margin-right: 10px;
-    }
-    .tileWarning {
-        margin-top: 5px;
-        text-align: right;
-    }
-    .tileWarning:after{
-        content: '\200b';
-    }
+.h1 {
+    text-align: center;
+    letter-spacing: 1pt;
+    margin: 10px 0;
+    font-weight: normal;
+    font-size: 40pt;
+    color: #dee0d5;
+    margin-bottom: -10px;
 }
-.islandPreviews {
+.h2 {
+    font-size: 16pt;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+.share {
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
     justify-content: space-between;
+    vertical-align: auto;
+    margin-bottom: 30px;
+}
+.shareBox {
+    flex: 1;
+    margin-right: 10px;
+}
+.tileWarning {
+    margin-top: 5px;
+    text-align: right;
+}
+.tileWarning:after{
+    content: '\200b';
 }
