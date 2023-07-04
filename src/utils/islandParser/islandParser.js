@@ -1,4 +1,5 @@
-const ALPHABET = 'OeiauAXIxUbcSfgdTklm9Hqrhtvwzyo_-BCDFGpJKLYNPQRnjVWEMZ012345678s';
+// alphabet weird like this so that certain islands spell certain words/sequences as an easter egg
+const ALPHABET = '012345_7x9abSdefThijkHmnupqr6tov-8yzABCDEFYlIJKLMNOPQRcGUVWXYwgs';
 
 if (ALPHABET.length < 64) {
   throw new Error('Alphabet not long enough to encode 6 bit characters (111111==64)');
