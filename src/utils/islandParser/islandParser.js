@@ -1,32 +1,47 @@
 const ALPHABET = 'aeiouAEIOUbcdfghjklmnpqrstvwxyz_-BCDFGHJKLMNPQRSTVWXYZ0123456789';
 
 if (ALPHABET.length < 64) {
-  throw new Error('Alphabet not long enough to encode 6 bits');
+  throw new Error('Alphabet not long enough to encode 6 bit characters (111111==64)');
 }
 
-
-const _char2bin = (char) => {
-  return ('000000' + ALPHABET.indexOf(char).toString(2)).slice(-6);
-};
-
+const char2bin = (char) => ('000000' + ALPHABET.indexOf(char).toString(2)).slice(-6);
+const transpose = (matrix) => matrix[0].map((col, i) => matrix.map(row => row[i]));
 const flatten = (arr) => [].concat.apply([], arr);
 const allZeroes = (row) => row && (row.join('').replaceAll('0', '').length === 0);
 
-const island2String = (isle) => {
-  let maxRowLen = 0;
-  const binStrs = flatten(isle.filter((row, rowNum) => {
+const trimTopBottom = isle => {
+  return isle.filter((row, rowNum) => {
     if (!allZeroes(row)) {
       return true;
     }
-    const hasNonEmptyRowBelow = isle.slice(rowNum + 1, isle.length).some(laterRow => !allZeroes(laterRow));
-    const hasNonEmptyRowAbove = isle.slice(0, rowNum).some(earlierRow => !allZeroes(earlierRow));
+    const hasFilledRowBelow = isle.slice(rowNum + 1, isle.length).some(laterRow => !allZeroes(laterRow));
+    const hasFilledRowsAboveAndBelow = hasFilledRowBelow && isle.slice(0, rowNum).some(earlierRow => !allZeroes(earlierRow));
 
-    return hasNonEmptyRowBelow && hasNonEmptyRowAbove;    
-  }).map(row => {
+    return hasFilledRowsAboveAndBelow;
+  });
+}
+
+const trimEmptyPadding = isle => {
+  if (isle.length === 0) {
+    return [];
+  }
+  const rotatedTrimmedIsle = trimTopBottom(transpose(isle));
+  if (rotatedTrimmedIsle.length === 0) {
+    // completely empty island
+    return [[]];
+  }
+  return trimTopBottom(transpose(rotatedTrimmedIsle));
+};
+
+
+const island2String = (isle) => {
+  let maxRowLen = 0;
+  const binStrs = flatten(trimEmptyPadding(isle).map(row => {
     if (row.length > maxRowLen) {
       maxRowLen = row.length;
     }
-    return row.join('').match(/.{1,6}/g).map(binStr => (binStr + '000000').slice(0, 6));
+    const sixBitChunks = row.join('').match(/.{1,6}/g);
+    return (sixBitChunks || []).map(binStr => (binStr + '000000').slice(0, 6));
   }));
 
   const chars = binStrs.map(bin => {
@@ -38,7 +53,7 @@ const island2String = (isle) => {
 
 const string2island = (str) => {
   const rowLength = ALPHABET.indexOf(str.charAt(0));
-  const letters = str.slice(1).split('').map(_char2bin).map(bin6 => bin6.split(''));
+  const letters = str.slice(1).split('').map(char2bin).map(bin6 => bin6.split(''));
   const island = [];
 
   for (let i = 0; i < letters.length; i++) {
@@ -73,6 +88,7 @@ console.log(str, IslandConverter.string2island(str).map(row=>row.join()));
 **/
 
 export {
+  transpose as _transpose,
   flatten as _flatten,
   allZeroes as _allZeroes,
   island2String,
