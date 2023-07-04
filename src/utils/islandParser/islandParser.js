@@ -1,4 +1,4 @@
-const ALPHABET = 'aeiouAEIOUbcdfghjklmnpqrstvwxyz_-BCDFGHJKLMNPQRSTVWXYZ0123456789';
+const ALPHABET = 'OeiouAXIxUbchfgdTklm9Hqrstvwzya_-BCDFGpJKLYNPQRSjVWEMZ012345678n';
 
 if (ALPHABET.length < 64) {
   throw new Error('Alphabet not long enough to encode 6 bit characters (111111==64)');

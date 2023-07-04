@@ -66,7 +66,7 @@ describe('island2string', () => {
       [0,0,0,0,0]
     ];
     const str = island2String(island);
-    expect(str).toBe('a');
+    expect(str).toBe('x');
 });
 
 test('handles completely full island', () => {
@@ -125,6 +125,6 @@ test('handles completely full island', () => {
       [1,1,1,1,1]
     ];
     const str = island2String(island);
-    expect(str).toBe('A8a8');
+    expect(str).toBe('A8x8');
   });
 });
