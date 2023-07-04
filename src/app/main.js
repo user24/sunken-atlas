@@ -81,10 +81,12 @@ export default function Main({islandString='', loading}) {
         )}
       </main>
       <section className={classes.islands}>
-        <h2 className={classes.h2}>Explore other islands</h2>
         <div className={classes.islandPreviews}>
           {islands.map((island => <Island size='s' isLink={true} tiles={island.tiles} key={island.tiles} />))}
         </div>
+        <p>
+          <em>preset islands curated from <a href='https://boardgamegeek.com/thread/569926/official-variant-tile-layouts/page/1'>BGG</a> &amp; my imagination</em>
+        </p>
       </section>
     </div>
   )
