@@ -9,9 +9,20 @@ const _char2bin = (char) => {
   return ('000000' + ALPHABET.indexOf(char).toString(2)).slice(-6);
 };
 
+const flatten = (arr) => [].concat.apply([], arr);
+const allZeroes = (row) => row && (row.join('').replaceAll('0', '').length === 0);
+
 const island2String = (isle) => {
   let maxRowLen = 0;
-  const binStrs = [].concat.apply([], isle.map(row => {
+  const binStrs = flatten(isle.filter((row, rowNum) => {
+    if (!allZeroes(row)) {
+      return true;
+    }
+    const hasNonEmptyRowBelow = isle.slice(rowNum + 1, isle.length).some(laterRow => !allZeroes(laterRow));
+    const hasNonEmptyRowAbove = isle.slice(0, rowNum).some(earlierRow => !allZeroes(earlierRow));
+
+    return hasNonEmptyRowBelow && hasNonEmptyRowAbove;    
+  }).map(row => {
     if (row.length > maxRowLen) {
       maxRowLen = row.length;
     }
@@ -62,6 +73,8 @@ console.log(str, IslandConverter.string2island(str).map(row=>row.join()));
 **/
 
 export {
+  flatten as _flatten,
+  allZeroes as _allZeroes,
   island2String,
   string2island
 };
