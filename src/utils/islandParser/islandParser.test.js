@@ -77,7 +77,7 @@ test('handles completely full island', () => {
     [1,1,1,1,1]
   ];
   const str = island2String(island);
-  expect(str).toBe('5gggg');
+  expect(str).toBe('5wwww');
 });
 
   test('removes leading empty rows', () => {
@@ -89,7 +89,7 @@ test('handles completely full island', () => {
         [1,1,1,1,1]
       ];
       const str = island2String(island);
-      expect(str).toBe('5gcg');
+      expect(str).toBe('5wcw');
   });
 
   test('removes trailing empty rows', () => {
@@ -101,7 +101,7 @@ test('handles completely full island', () => {
       [0,0,0,0,0]
     ];
     const str = island2String(island);
-    expect(str).toBe('5gcg');
+    expect(str).toBe('5wcw');
   });
 
   test('removes leading and trailing empty rows', () => {
@@ -115,7 +115,7 @@ test('handles completely full island', () => {
         [0,0,0,0,0]
       ];
       const str = island2String(island);
-      expect(str).toBe('5gcg');
+      expect(str).toBe('5wcw');
   });
 
   test('does not remove empty rows inside an island', () => {
@@ -125,6 +125,6 @@ test('handles completely full island', () => {
       [1,1,1,1,1]
     ];
     const str = island2String(island);
-    expect(str).toBe('5g0g');
+    expect(str).toBe('5w0w');
   });
 });
