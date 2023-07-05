@@ -19,7 +19,7 @@ Typically, next.js apps required a node-capable host. Sunken Atlas uses static e
 To ensure dynamic routing works, we use a custom `.htaccess` which redirects requests to the correct files. This exists in the repository under `/public`, and will get automatically moved into `/out` when you export the app:
 
 ```bash
-npm run export
+npm run build
 ```
 
 To deploy, simply upload everything in `/out` to the host root. You will need to clear the browser cache.
