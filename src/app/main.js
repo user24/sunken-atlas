@@ -66,8 +66,8 @@ export default function Main({islandString='', loading}) {
   return (
     <div className={classes.wrapper}>
       <main className={classes.main}>
-        <h1 className={[font.className, classes.h1].join(' ')}><Link href='/'>The Sunken Atlas</Link></h1>
-        <div className={classes.welcome}>Forbidden Island alternate layouts &amp; map editor</div>
+        <h1 className={[font.className, classes.h1].join(' ')}><Link href='/'>Sunken Atlas</Link></h1>
+        <div className={classes.welcome}>the <a target='_blank' href='https://boardgamegeek.com/boardgame/65244/forbidden-island'>Forbidden Island</a> layout editor</div>
         <Island editable toggleTile={toggleTile} tiles={tiles} />
         <div className={classes.tileWarning}>{getTileNumberWarning()}</div>
         {loading && islandString ? null : (
@@ -84,8 +84,10 @@ export default function Main({islandString='', loading}) {
         <div className={classes.islandPreviews}>
           {islands.map((island => <Island size='s' isLink={true} tiles={island.tiles} key={island.tiles} />))}
         </div>
-        <p>
-          <em>preset islands curated from <a href='https://boardgamegeek.com/thread/569926/official-variant-tile-layouts/page/1'>BGG</a> &amp; my imagination</em>
+        <p className={classes.p}>
+          <em>
+            Islands from <a target='_blank' href='https://boardgamegeek.com/thread/569926/official-variant-tile-layouts/page/1'>BGG</a> &amp; <a target='_blank' href='https://solidred.co.uk'>my imagination</a>. Code on <a target='_blank' href='https://github.com/user24/forbidden-island-editor/'>github</a>.
+          </em>
         </p>
       </section>
     </div>

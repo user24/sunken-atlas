@@ -1,5 +1,11 @@
 ## Sunken Atlas - the Forbidden Island layout editor
 
+See the project running live at [SunkenAtlas.com](https://sunkenatlas.com).
+
+Get the code [on github](https://github.com/user24/forbidden-island-editor).
+
+A side project by [Howard Yeend](https://solidred.co.uk).
+
 ## Running development server
 
 ```bash

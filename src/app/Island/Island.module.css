@@ -36,8 +36,6 @@
 .editor:not(.small) .tile:hover {
     outline: 1px solid #666;
 }
-
-
 .filled {
     background: #8F425B;
 }

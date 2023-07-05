@@ -2,9 +2,7 @@
     width: 950px;
     display: flex;
     justify-content: center;
-    margin: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 20px auto;
     border-radius: 20px;
     border: 3px solid #dee0d5;
     /* https://mycolor.space/gradient3 */
@@ -42,11 +40,12 @@
 .islandPreviews {
     display: flex;
     flex-wrap: wrap;
-    row-gap: 10px;
-    column-gap: 10px;
+    row-gap: 9px;
+    column-gap: 9px;
 }
-.welcome {
-    text-align: right;
+.welcome, .welcome > a {
+    text-align: center;
+    font-style: italic;
     color: #dee0d5;
     margin-bottom: 10px;
 }
@@ -84,4 +83,8 @@
 }
 .tileWarning:after{
     content: '\200b';
+}
+.p {
+    margin: 10px;
+    font-size: 12pt;
 }
