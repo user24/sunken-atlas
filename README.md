@@ -1,3 +1,25 @@
+## Sunken Atlas - the Forbidden Island layout editor
+
+## Running development server
+
+```bash
+npm run dev
+```
+
+## Deploying
+
+Typically, next.js apps required a node-capable host. Sunken Atlas uses static export in order to use basic LAMP virtual hosting.
+
+To ensure dynamic routing works, we use a custom `.htaccess` which redirects requests to the correct files. This exists in the repository under `/public`, and will get automatically moved into `/out` when you export the app:
+
+```bash
+npm run export
+```
+
+To deploy, simply upload everything in `/out` to the host root. You will need to clear the browser cache.
+
+## Boilerplate next.js readme
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
