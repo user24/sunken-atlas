@@ -2,10 +2,8 @@ import styles from './Island.module.css';
 import React from 'react';
 import Link from 'next/link';
 import { island2String } from '@/utils/islandParser/islandParser';
-import { useRouter } from 'next/router';
 
 const Island = ({editable, tiles, size,  isLink, name, toggleTile}) => {
-    const router = useRouter();
     const sumTiles = tiles.reduce((length, row) => length + row.filter(cell => cell === 1).length, 0);
     const validLength = sumTiles <= 24;
     const code = island2String(tiles);

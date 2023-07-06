@@ -18,17 +18,23 @@ export default function Main({islandString='', loading}) {
   const copyLabels = ['Copy', 'Copied'];
 
   const [copyLabel, setCopyLabel] = useState(copyLabels[0]);
-  const [editString, setEditString] = useState(islandString);
-  const tiles = string2island(editString);
-  const link = `${hostname}/i/${editString}`;
+  const [tiles, setTiles] = useState(string2island(islandString));
+  const link = `${hostname}/i/${island2String(tiles)}`;
 
   useEffect(() => {
-    setEditString(islandString);
+    setTiles(string2island(islandString));
   }, [islandString]);
 
   useEffect(() => {
     setCopyLabel(copyLabels[0]);
-  }, [editString]);
+  }, [tiles]);
+
+  const toggleTile = (x, y) => {
+    const newTiles = [...tiles];
+    newTiles[y][x] = newTiles[y][x] ? 0 : 1;
+    //newIsland.name = getIslandName(editingIsland.code);
+    setTiles(newTiles);
+  };
 
   const selectMe = (e) => {
     e.target.select();
@@ -37,13 +43,6 @@ export default function Main({islandString='', loading}) {
   const copy = () => {
     navigator.clipboard.writeText(link);
     setCopyLabel(copyLabels[1]);
-  }
-
-  const toggleTile = (x, y) => {
-    const newTiles = [...tiles];
-    newTiles[y][x] = newTiles[y][x] ? 0 : 1;
-    //newIsland.name = getIslandName(editingIsland.code);
-    setEditString(island2String(newTiles));
   };
 
   const getTileNumberWarning = () => {
@@ -61,7 +60,7 @@ export default function Main({islandString='', loading}) {
     } else {
       return '';
     }
-  }
+  };
 
   return (
     <div className={classes.wrapper}>
@@ -91,5 +90,5 @@ export default function Main({islandString='', loading}) {
         </p>
       </section>
     </div>
-  )
+  );
 }

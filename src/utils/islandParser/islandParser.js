@@ -34,6 +34,7 @@ const trimEmptyPadding = isle => {
   return trimTopBottom(transpose(rotatedTrimmedIsle));
 };
 
+const isEven = x => x % 2 === 0;
 
 const island2String = (isle) => {
   let maxRowLen = 0;
@@ -71,6 +72,20 @@ const string2island = (str) => {
       i++;
     }
     island.push(row.map(b => parseInt(b)));
+}
+
+  // Add a moat around the island if needed
+  let xMoat = 8 - rowLength;
+  let yMoat = 8 - island.length;
+  while (xMoat--) {
+    const method = isEven(xMoat) ? 'push' : 'unshift';
+    island.forEach(row => {
+      row[method](0);
+    });
+  }
+  while (yMoat--) {
+    const method = isEven(yMoat) ? 'unshift' : 'push';
+    island[method]([0,0,0,0,0,0,0,0]);
   }
   return island;
 };

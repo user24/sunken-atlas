@@ -56,6 +56,23 @@ describe('Helpers', () => {
   });
 });
 
+describe('string2island', () => {
+  test('centers island', () => {
+    const string = '1-';
+    const island = string2island(string);
+    expect(island).toEqual([
+      [0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0],
+      [0,0,0,1,0,0,0,0],
+      [0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0]
+    ]);
+  });
+});
+
 describe('island2string', () => {
 
   test('handles entirely empty island', () => {
