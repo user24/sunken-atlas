@@ -16,31 +16,11 @@ const hostname = 'https://sunkenatlas.com';
 export default function Main({islandString='', loading}) {
 
   const copyLabels = ['Copy', 'Copied'];
-  const testDirty = () => editString !== islandString;
 
   const [copyLabel, setCopyLabel] = useState(copyLabels[0]);
   const [editString, setEditString] = useState(islandString);
-  const [pageDirty, setPageDirty] = useState(testDirty());
   const tiles = string2island(editString);
   const link = `${hostname}/i/${editString}`;
-  
-  const confirmClose = (e) => {
-    if (pageDirty) {
-      e.preventDefault();
-      e.returnValue = '';
-    }
-  };
-
-  useEffect(() => {
-    setPageDirty(testDirty());
-  }, [editString, islandString]);
-
-  useEffect(() => {
-    window.addEventListener('beforeunload', confirmClose);
-    return () => {
-      window.removeEventListener('beforeunload', confirmClose);
-    }
-  },[]);
 
   useEffect(() => {
     setEditString(islandString);
