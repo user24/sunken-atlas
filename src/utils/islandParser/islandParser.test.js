@@ -131,27 +131,26 @@ describe('Helpers', () => {
   });
 });
 
-describe('string2island', () => {
+describe('island-parsing', () => {
+
   test('centers island', () => {
     const string = island2String([
       [[1]]
     ]);
+    expect(string).toBe('101');
 
     const island = string2island(string);
     expect(island).toEqual([
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0],
-      [0,0,0,1,0,0,0,0],
       [0,0,0,0,0,0,0,0],
+      [0,0,0,1,0,0,0,0],
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
     ]);
   });
-});
-
-describe('island2string', () => {
 
   test('handles entirely empty island', () => {
     const island = [
@@ -162,6 +161,7 @@ describe('island2string', () => {
     ];
     const str = island2String(island);
     expect(str).toBe('00');
+    expect(string2island(str, false)).toEqual([]);
 });
 
 test('handles completely full island', () => {
@@ -173,6 +173,12 @@ test('handles completely full island', () => {
   ];
   const str = island2String(island);
   expect(str).toBe('50vvvv');
+  expect(string2island(str, false)).toEqual([
+    [1,1,1,1,1],
+    [1,1,1,1,1],
+    [1,1,1,1,1],
+    [1,1,1,1,1]
+  ]);
 });
 
   test('removes leading empty rows', () => {
@@ -185,6 +191,11 @@ test('handles completely full island', () => {
       ];
       const str = island2String(island);
       expect(str).toBe('50vrv');
+      expect(string2island(str, false)).toEqual([
+        [1,1,1,1,1],
+        [1,1,0,1,1],
+        [1,1,1,1,1]
+      ]);
   });
 
   test('removes trailing empty rows', () => {
@@ -197,6 +208,11 @@ test('handles completely full island', () => {
     ];
     const str = island2String(island);
     expect(str).toBe('50vrv');
+    expect(string2island(str, false)).toEqual([
+      [1,1,1,1,1],
+      [1,1,0,1,1],
+      [1,1,1,1,1]
+    ]);
   });
 
   test('removes leading and trailing empty rows', () => {
@@ -211,6 +227,11 @@ test('handles completely full island', () => {
       ];
       const str = island2String(island);
       expect(str).toBe('50vrv');
+      expect(string2island(str, false)).toEqual([
+        [1,1,1,1,1],
+        [1,1,0,1,1],
+        [1,1,1,1,1]
+      ]);
   });
 
   test('does not remove empty rows inside an island', () => {
@@ -221,5 +242,6 @@ test('handles completely full island', () => {
     ];
     const str = island2String(island);
     expect(str).toBe('50v0v');
+    expect(string2island(str, false)).toEqual(island);
   });
 });

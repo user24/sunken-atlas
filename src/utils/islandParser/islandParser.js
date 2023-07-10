@@ -98,27 +98,30 @@ const island2String = (isle) => {
   return encodeHeader({ cols: maxRowLen }) + binary2string(bins.join(''));
 };
 
-const string2island = (str) => {
+const string2island = (str, addMoat = true) => {
   
   const { cols, islandChars } = splitHeader(str);
-  const letters = islandChars.map(char => dec2bin(ALPHABET.indexOf(char))).map(bin6 => bin6.split(''));
   const island = [];
 
-  for (let i = 0; i < letters.length; i++) {
+  for (let i = 0; i < islandChars.length; i++) {
     let row = [];
-    while (row.length < cols) {
+    while (row.length <= cols) {
+      const decimal = ALPHABET.indexOf(islandChars[i]);
+      const binary = dec2bin(decimal).split('');
       // Add all the binary this letter encoded
-      row = row.concat(letters[i]);
+      row = row.concat(binary);
       if (row.length >= cols) {
-        // This is now too long; trim it down to length
-        row = row.slice(0, cols);
         break;
       }
       // Get ready to look ahead to the next letter
       i++;
     }
-    island.push(row.map(b => parseInt(b)));
-}
+    island.push(row.slice(0 - cols).map(b => parseInt(b)));
+  }
+  
+  if (!addMoat) {
+    return island;
+  }
 
   // Add a moat around the island if needed
   let xMoat = 8 - cols;
