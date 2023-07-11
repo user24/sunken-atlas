@@ -133,7 +133,7 @@ describe('Helpers', () => {
 
 describe('island-parsing', () => {
 
-  test('centers island', () => {
+  test('centers island in a moat', () => {
     const string = island2String([
       [[1]]
     ]);
@@ -178,6 +178,24 @@ test('handles completely full island', () => {
     [1,1,1,1,1],
     [1,1,1,1,1],
     [1,1,1,1,1]
+  ]);
+});
+
+
+test('handles island exactly 8 columns', () => {
+  const island = [
+    [1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1],
+  ];
+  const str = island2String(island);
+  expect(str).toBe('x0s3s3s3s3');
+  expect(string2island(str, false)).toEqual([
+    [1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1]
   ]);
 });
 

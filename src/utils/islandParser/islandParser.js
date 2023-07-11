@@ -118,7 +118,7 @@ const string2island = (str, addMoat = true) => {
     }
     island.push(row.slice(0 - cols).map(b => parseInt(b)));
   }
-  
+
   if (!addMoat) {
     return island;
   }
@@ -132,9 +132,11 @@ const string2island = (str, addMoat = true) => {
       row[method](0);
     });
   }
+  const atLeast8Cols = Math.max(8, cols);
+  const allZeroes = Array(atLeast8Cols).fill(0);
   while (yMoat--) {
     const method = isEven(yMoat) ? 'unshift' : 'push';
-    island[method]([0,0,0,0,0,0,0,0]);
+    island[method](allZeroes);
   }
   return island;
 };
