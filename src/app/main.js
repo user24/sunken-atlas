@@ -74,7 +74,7 @@ export default function Main({islandString='', loading}) {
         <div className={classes.tileWarning}>{getTileNumberWarning()}</div>
         {loading && islandString ? null : (
           <>
-            <h2 className={classes.h2}>Share '{islandName}'</h2>
+            <h2 className={classes.h2}>Share &apos;{islandName}&apos;</h2>
             <div className={classes.share}>
               <input className={classes.shareBox} type='text' value={link} readOnly onClick={selectMe} />
               <button className={classes.shareButton} onClick={copy}>{copyLabel}</button>
