@@ -5,7 +5,7 @@ if (ALPHABET.length < 64) {
   throw new Error('Alphabet not long enough to encode 6 bit characters (111111==64)');
 }
 
-const dec2bin = (dec, minLength = 6) => ('00000000000000000000' + (dec.toString(2))).slice(0 - minLength);
+const dec2bin = (dec, minLength = 0) => (Array(minLength).fill(0).join('') + (dec.toString(2))).slice(0 - minLength);
 const transpose = (matrix) => matrix[0].map((col, i) => matrix.map(row => row[i]));
 const flatten = (arr) => [].concat.apply([], arr);
 const allZeroes = (row) => row && (row.join('').replaceAll('0', '').length === 0);
@@ -15,7 +15,7 @@ const trimTopBottom = isle => {
     if (!allZeroes(row)) {
       return true;
     }
-    const hasFilledRowBelow = isle.slice(rowNum + 1, isle.length).some(laterRow => !allZeroes(laterRow));
+    const hasFilledRowBelow = isle.slice(rowNum + 1).some(laterRow => !allZeroes(laterRow));
     const hasFilledRowsAboveAndBelow = hasFilledRowBelow && isle.slice(0, rowNum).some(earlierRow => !allZeroes(earlierRow));
 
     return hasFilledRowsAboveAndBelow;
@@ -49,7 +49,7 @@ const decodeHeader = header => {
 };
 
 const string2binary = str => {
-  return str.split('').map(char => dec2bin(ALPHABET.indexOf(char))).join('');
+  return str.split('').map(char => dec2bin(ALPHABET.indexOf(char), 6)).join('');
 };
 const binary2string = bin => {
   return (bin.match(/.{1,6}/g) || []).map(binStr => ALPHABET.charAt(parseInt(binStr, 2))).join('');
@@ -92,7 +92,7 @@ const island2String = (isle) => {
     if (row.length > maxRowLen) {
       maxRowLen = row.length;
     }
-    return row.join('').match(/.{0,6}/g).filter(b => b.length).map(bin => ('000000' + bin).slice(-6));
+    return row.join('').match(/.{0,6}/g).filter(b => b.length).map(bin => (bin + '000000').slice(0, 6));
   }));
 
   return encodeHeader({ cols: maxRowLen }) + binary2string(bins.join(''));
@@ -107,16 +107,15 @@ const string2island = (str, addMoat = true) => {
     let row = [];
     while (row.length <= cols) {
       const decimal = ALPHABET.indexOf(islandChars[i]);
-      const binary = dec2bin(decimal).split('');
+      const binary = dec2bin(decimal, 6).split('');
       // Add all the binary this letter encoded
       row = row.concat(binary);
-      if (row.length >= cols) {
-        break;
+      if (row.length < cols) {
+        // Get ready to look ahead to the next letter
+        i++;
       }
-      // Get ready to look ahead to the next letter
-      i++;
     }
-    island.push(row.slice(0 - cols).map(b => parseInt(b)));
+    island.push(row.slice(0, cols).map(b => parseInt(b)));
   }
 
   if (!addMoat) {
@@ -155,6 +154,7 @@ console.log(str, IslandConverter.string2island(str).map(row=>row.join()));
 **/
 
 export {
+  splitHeader as _splitHeader,
   string2binary as _string2binary,
   binary2string as _binary2string,
   encodeHeader as _encodeHeader,

@@ -20,7 +20,6 @@ describe('header', () => {
       offsetY: 4
     });
     expect(header).toBe('i6');
-    expect(header.length).toBe(2);
     const decoded = decodeHeader(header);
     expect(decoded.version).toBe(1);
     expect(decoded.cols).toBe(2);
@@ -60,9 +59,9 @@ describe('header', () => {
 describe('Helpers', () => {
 
   test('dec2bin', () => {
-    let bin = dec2bin(1);
+    let bin = dec2bin(1, 6);
     expect(bin).toBe('000001');
-    bin = dec2bin(2);
+    bin = dec2bin(2, 6);
     expect(bin).toBe('000010');
     bin = dec2bin(2,3);
     expect(bin).toBe('010');
@@ -81,6 +80,10 @@ describe('Helpers', () => {
   test('string-binary', () => {
     expect(string2binary('abc')).toBe('001010001011110110');
     expect(binary2string(string2binary('abc'))).toBe('abc');
+
+    expect(string2binary('x0')).toBe('001000000000');
+    expect(binary2string(string2binary('x0'))).toBe('x0');
+
   });
 
   test('transpose works', () => {
@@ -137,7 +140,7 @@ describe('island-parsing', () => {
     const string = island2String([
       [[1]]
     ]);
-    expect(string).toBe('101');
+    expect(string).toBe('10-');
 
     const island = string2island(string);
     expect(island).toEqual([
@@ -162,42 +165,42 @@ describe('island-parsing', () => {
     const str = island2String(island);
     expect(str).toBe('00');
     expect(string2island(str, false)).toEqual([]);
-});
+  });
 
-test('handles completely full island', () => {
-  const island = [
-    [1,1,1,1,1],
-    [1,1,1,1,1],
-    [1,1,1,1,1],
-    [1,1,1,1,1]
-  ];
-  const str = island2String(island);
-  expect(str).toBe('50vvvv');
-  expect(string2island(str, false)).toEqual([
-    [1,1,1,1,1],
-    [1,1,1,1,1],
-    [1,1,1,1,1],
-    [1,1,1,1,1]
-  ]);
-});
+  test('handles completely full island', () => {
+    const island = [
+      [1,1,1,1,1],
+      [1,1,1,1,1],
+      [1,1,1,1,1],
+      [1,1,1,1,1]
+    ];
+    const str = island2String(island);
+    expect(str).toBe('50wwww');
+    expect(string2island(str, false)).toEqual([
+      [1,1,1,1,1],
+      [1,1,1,1,1],
+      [1,1,1,1,1],
+      [1,1,1,1,1]
+    ]);
+  });
 
-
-test('handles island exactly 8 columns', () => {
-  const island = [
-    [1,1,1,1,1,1,1,1],
-    [1,1,1,1,1,1,1,1],
-    [1,1,1,1,1,1,1,1],
-    [1,1,1,1,1,1,1,1],
-  ];
-  const str = island2String(island);
-  expect(str).toBe('x0s3s3s3s3');
-  expect(string2island(str, false)).toEqual([
-    [1,1,1,1,1,1,1,1],
-    [1,1,1,1,1,1,1,1],
-    [1,1,1,1,1,1,1,1],
-    [1,1,1,1,1,1,1,1]
-  ]);
-});
+  test('handles island exactly 8 columns', () => {
+    const island = [
+      [1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1],
+    ];
+    const str = island2String(island);
+    expect(str).toBe('x0sMsMsMsM');
+    // using stringify to make the diffs easier to read
+    expect(JSON.stringify(string2island(str, false))).toEqual(JSON.stringify([
+      [1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1]
+    ]));
+  });
 
   test('removes leading empty rows', () => {
       const island = [
@@ -208,7 +211,7 @@ test('handles island exactly 8 columns', () => {
         [1,1,1,1,1]
       ];
       const str = island2String(island);
-      expect(str).toBe('50vrv');
+      expect(str).toBe('50wcw');
       expect(string2island(str, false)).toEqual([
         [1,1,1,1,1],
         [1,1,0,1,1],
@@ -225,7 +228,7 @@ test('handles island exactly 8 columns', () => {
       [0,0,0,0,0]
     ];
     const str = island2String(island);
-    expect(str).toBe('50vrv');
+    expect(str).toBe('50wcw');
     expect(string2island(str, false)).toEqual([
       [1,1,1,1,1],
       [1,1,0,1,1],
@@ -244,7 +247,7 @@ test('handles island exactly 8 columns', () => {
         [0,0,0,0,0]
       ];
       const str = island2String(island);
-      expect(str).toBe('50vrv');
+      expect(str).toBe('50wcw');
       expect(string2island(str, false)).toEqual([
         [1,1,1,1,1],
         [1,1,0,1,1],
@@ -259,7 +262,7 @@ test('handles island exactly 8 columns', () => {
       [1,1,1,1,1]
     ];
     const str = island2String(island);
-    expect(str).toBe('50v0v');
+    expect(str).toBe('50w0w');
     expect(string2island(str, false)).toEqual(island);
   });
 });
