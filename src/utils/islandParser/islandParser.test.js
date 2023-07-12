@@ -136,6 +136,29 @@ describe('Helpers', () => {
 
 describe('island-parsing', () => {
 
+  test('handles long island', () => {
+    const island = string2island('a0UGsGG6', false);
+    expect(island).toEqual([
+      [1, 1, 1, 0, 0, 0, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 0, 0, 1, 1, 1]
+    ]);
+  });
+
+  test('handles long island with moat', () => {
+    const island = string2island('a0UGsGG6');
+    expect(island).toEqual([
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [1, 1, 1, 0, 0, 0, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 0, 0, 1, 1, 1],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    ]);
+  });
+
   test('centers island in a moat', () => {
     const string = island2String([
       [[1]]
@@ -147,8 +170,8 @@ describe('island-parsing', () => {
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0],
       [0,0,0,1,0,0,0,0],
+      [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0]
@@ -193,13 +216,7 @@ describe('island-parsing', () => {
     ];
     const str = island2String(island);
     expect(str).toBe('x0sMsMsMsM');
-    // using stringify to make the diffs easier to read
-    expect(JSON.stringify(string2island(str, false))).toEqual(JSON.stringify([
-      [1,1,1,1,1,1,1,1],
-      [1,1,1,1,1,1,1,1],
-      [1,1,1,1,1,1,1,1],
-      [1,1,1,1,1,1,1,1]
-    ]));
+    expect(JSON.stringify(string2island(str, false))).toEqual(JSON.stringify(island));
   });
 
   test('removes leading empty rows', () => {

@@ -36,8 +36,12 @@ const trimEmptyPadding = isle => {
 
 const isEven = x => x % 2 === 0;
 
-const decodeHeader = header => {
-  header = string2binary(header);
+const decodeHeader = headerStr => {
+  const header = string2binary(headerStr);
+
+  if (header.length !== 12) {
+    throw new Error(`Invalid header ${headerStr}`);
+  }
   const [nada ,version, cols, offsetX, offsetY] = header.match(/^(.{2})(.{4})(.{3})(.{3})/).map(resultBin => parseInt(resultBin, 2) || 0);
 
   return {
@@ -99,42 +103,40 @@ const island2String = (isle) => {
 };
 
 const string2island = (str, addMoat = true) => {
-  
   const { cols, islandChars } = splitHeader(str);
   const island = [];
 
+  let row = [];
   for (let i = 0; i < islandChars.length; i++) {
-    let row = [];
-    while (row.length <= cols) {
-      const decimal = ALPHABET.indexOf(islandChars[i]);
-      const binary = dec2bin(decimal, 6).split('');
-      // Add all the binary this letter encoded
-      row = row.concat(binary);
-      if (row.length < cols) {
-        // Get ready to look ahead to the next letter
-        i++;
-      }
+    const decimal = ALPHABET.indexOf(islandChars[i]);
+    const binary = dec2bin(decimal, 6);
+
+    row = row.concat(binary.split('').map(b => parseInt(b)));
+    if (row.length >= cols) {
+      island.push(row.slice(0, cols));
+      row = [];
     }
-    island.push(row.slice(0, cols).map(b => parseInt(b)));
   }
 
   if (!addMoat) {
     return island;
   }
 
+  const toggleMethod = num => isEven(num) ? 'push' : 'unshift';
+
   // Add a moat around the island if needed
   let xMoat = 8 - cols;
   let yMoat = 8 - island.length;
-  while (xMoat--) {
-    const method = isEven(xMoat) ? 'push' : 'unshift';
+  while (xMoat-- > 0) { // the > 0 is because if xMoat<0 at the start, it's infinite loopin' time.
+    const method = toggleMethod(xMoat);
     island.forEach(row => {
       row[method](0);
     });
   }
   const atLeast8Cols = Math.max(8, cols);
   const allZeroes = Array(atLeast8Cols).fill(0);
-  while (yMoat--) {
-    const method = isEven(yMoat) ? 'unshift' : 'push';
+  while (yMoat-- > 0) {
+    const method = toggleMethod(yMoat);
     island[method](allZeroes);
   }
   return island;
