@@ -4,16 +4,7 @@ import Link from 'next/link';
 import { island2String } from '@/utils/islandParser/islandParser';
 
 const Island = ({editable, tiles, size,  isLink, name, toggleTile}) => {
-    const sumTiles = tiles.reduce((length, row) => length + row.filter(cell => cell === 1).length, 0);
-    const validLength = sumTiles <= 24;
     const code = island2String(tiles);
-    const islandClassName = editable ? 'layout-tiles editable': 'layout-tiles';
-    /*{ (!editable) ? '' : (
-        <>
-        <div className={`sum ${validLength ? '' : 'invalid'}`}>({sumTiles} tiles)</div>
-        {validLength ? '' : 'Forbidden Island only includes 24 tiles'}
-        </>
-    ) }*/
     const editorClasses = [styles.editor];
     if (size === 's') {
         editorClasses.push(styles.small);
