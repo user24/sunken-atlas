@@ -20,18 +20,22 @@ export default function Main({islandString='', loading}) {
   const [tiles, setTiles] = useState(string2island(islandString));
   const link = `${hostname}/i/${island2String(tiles)}`;
 
+  const [islandName, setIslandName] = useState('');
+
+  const getIslandName = islandStr => (islands.find(isle => island2String(isle.tiles) === islandStr) || {name: 'Unknown Isle'}).name;
+
   useEffect(() => {
     setTiles(string2island(islandString));
   }, [islandString]);
 
   useEffect(() => {
     setCopyLabel(copyLabels[0]);
+    setIslandName(getIslandName(island2String(tiles)));
   }, [tiles]);
 
   const toggleTile = (x, y) => {
     const newTiles = [...tiles];
     newTiles[y][x] = newTiles[y][x] ? 0 : 1;
-    //newIsland.name = getIslandName(editingIsland.code);
     setTiles(newTiles);
   };
 
@@ -70,7 +74,7 @@ export default function Main({islandString='', loading}) {
         <div className={classes.tileWarning}>{getTileNumberWarning()}</div>
         {loading && islandString ? null : (
           <>
-            <h2 className={classes.h2}>Share this island</h2>
+            <h2 className={classes.h2}>Share '{islandName}'</h2>
             <div className={classes.share}>
               <input className={classes.shareBox} type='text' value={link} readOnly onClick={selectMe} />
               <button className={classes.shareButton} onClick={copy}>{copyLabel}</button>
