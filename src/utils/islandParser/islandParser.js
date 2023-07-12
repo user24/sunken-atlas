@@ -137,7 +137,7 @@ const string2island = (str, addMoat = true) => {
   const allZeroes = Array(atLeast8Cols).fill(0);
   while (yMoat-- > 0) {
     const method = toggleMethod(yMoat);
-    island[method](allZeroes);
+    island[method]([...allZeroes]);
   }
   return island;
 };

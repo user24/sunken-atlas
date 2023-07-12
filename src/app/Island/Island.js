@@ -29,7 +29,7 @@ const Island = ({editable, tiles, size,  isLink, name, toggleTile}) => {
                             if (size==='s') {
                                 classNames.push(styles.small);
                             }
-                            const key = `tile-cell-${x},${y}`;
+                            const key = `tile-cell-${y}-${x}`;
                             return <div onClick={editable ? () => toggleTile(x, y) : null} key={key} className={classNames.join(' ')} />
                         })}
                     </div>

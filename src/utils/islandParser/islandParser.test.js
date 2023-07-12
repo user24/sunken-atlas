@@ -178,6 +178,22 @@ describe('island-parsing', () => {
     ]);
   });
 
+  test('modifying moat only affects that row', () => {
+    // (if this fails, we are adding moat by ref not value)
+    const island = [
+      [0,0,1,1,0],
+      [0,0,1,1,0]
+    ];
+    const str = island2String(island);
+    const isle = string2island(str);
+    isle[0][1] = 1;
+    expect(isle[1][1]).toBe(0);
+    expect(isle[2][1]).toBe(0);
+    expect(isle[5][1]).toBe(0);
+    expect(isle[6][1]).toBe(0);
+    expect(isle[7][1]).toBe(0);
+  });
+
   test('handles entirely empty island', () => {
     const island = [
       [0,0,0,0,0],
