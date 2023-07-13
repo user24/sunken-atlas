@@ -19,9 +19,7 @@ export default function Main({islandString='', loading}) {
   const [copyLabel, setCopyLabel] = useState(copyLabels[0]);
   const [tiles, setTiles] = useState(string2island(islandString));
   const link = `${hostname}/i/${island2String(tiles)}`;
-
   const [islandName, setIslandName] = useState('');
-
   const getIslandName = islandStr => (islands.find(isle => island2String(isle.tiles) === islandStr) || {name: 'Unknown Isle'}).name;
 
   useEffect(() => {

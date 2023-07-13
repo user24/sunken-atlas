@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const useLeaveSite = (test, deps) => {
-    console.log('init', test());
+    console.log('init', deps, test());
+    const router = useRouter();
     const [dirty, setDirty] = useState(test());
 
     const confirmClose = (e) => {
@@ -19,8 +21,10 @@ const useLeaveSite = (test, deps) => {
     }, deps);
 
     useEffect(() => {
+        router.events.on("routeChangeStart", confirmClose);
         window.addEventListener('beforeunload', confirmClose);
         return () => {
+            router.events.off("routeChangeStart", confirmClose);
             window.removeEventListener('beforeunload', confirmClose);
         };
     },

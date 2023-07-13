@@ -103,6 +103,9 @@ const island2String = (isle) => {
 };
 
 const string2island = (str, addMoat = true) => {
+  if (!str.length) {
+    return [];
+  }
   const { cols, islandChars } = splitHeader(str);
   const island = [];
 

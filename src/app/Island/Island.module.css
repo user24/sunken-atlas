@@ -12,6 +12,12 @@
         padding: 5px;
     }
 }
+@media screen and (max-width: 1024px) {
+    .editor {
+        height: 425px;
+        width: 425px;
+    }
+}
 .editor.small {
     width: 80px;
     height: 80px;
