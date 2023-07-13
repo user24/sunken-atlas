@@ -12,10 +12,10 @@ const font = Font({
 });
 
 const hostname = 'https://sunkenatlas.com';
+const copyLabels = ['Copy', 'Copied'];
 
 export default function Main({islandString='', loading}) {
 
-  const copyLabels = ['Copy', 'Copied'];
   const [copyLabel, setCopyLabel] = useState(copyLabels[0]);
   const [tiles, setTiles] = useState(string2island(islandString));
   const link = `${hostname}/i/${island2String(tiles)}`;
