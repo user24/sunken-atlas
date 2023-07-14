@@ -4,7 +4,7 @@ See the project running live at [SunkenAtlas.com](https://sunkenatlas.com).
 
 Get the code [on github](https://github.com/user24/forbidden-island-editor).
 
-A side project by [Howard Yeend](https://solidred.co.uk).
+A side project by [Howard Yeend](https://solidred.co.uk), an iteration of a [previous side project](https://github.com/user24/forbidden-islands) of mine.
 
 ## Running development server
 
