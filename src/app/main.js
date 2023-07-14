@@ -5,6 +5,7 @@ import { string2island, island2String } from '@/utils/islandParser/islandParser'
 import islands from './data/islands.json';
 import { IM_Fell_English_SC as Font } from 'next/font/google';
 import Link from 'next/link';
+import { useTheme } from "next-themes";
 
 const font = Font({
   subsets: ['latin'],
@@ -15,7 +16,7 @@ const hostname = 'https://sunkenatlas.com';
 const copyLabels = ['Copy', 'Copied'];
 
 export default function Main({islandString='', loading}) {
-
+  const { systemTheme, theme, setTheme } = useTheme();
   const [copyLabel, setCopyLabel] = useState(copyLabels[0]);
   const [tiles, setTiles] = useState(string2island(islandString));
   const link = `${hostname}/i/${island2String(tiles)}`;
@@ -88,6 +89,7 @@ export default function Main({islandString='', loading}) {
           <em>
             Islands from <a target='_blank' href='https://boardgamegeek.com/thread/569926/official-variant-tile-layouts/page/1'>BGG</a> &amp; <a target='_blank' href='https://solidred.co.uk'>my imagination</a>. Code on <a target='_blank' href='https://github.com/user24/forbidden-island-editor/'>github</a>.
           </em>
+          <button onClick={() => theme !== "print" ? setTheme('print'): setTheme("default")}>Toggle Print Mode</button>
         </p>
       </section>
     </div>

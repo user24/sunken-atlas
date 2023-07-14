@@ -9,6 +9,11 @@
     background-image: linear-gradient(to bottom, #402643, #773958, #af4f5f, #dd715a, #f99f4e, #eab948, #d2d354, #40d3c9, #50c6d3);
     /* background-image: linear-gradient(to top, #4dc5d6, #62cdc6, #82d3b4, #a4d6a5, #c6d89d, #d4d08d, #e4c682, #f4bb7d, #f9a36b, #fd8862, #fe6a63, #fc466b); */
 }
+.print {
+    .wrapper {
+        background-image: none;
+    }
+}
 @media screen and (max-width: 1023px) {
     .wrapper {
         width: 450px;
