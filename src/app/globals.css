@@ -4,6 +4,9 @@ body {
   box-sizing: border-box;
   font-size: 14pt;
 }
+[theme=print] body {
+  background: none;
+}
 h1 > a {
   text-decoration: inherit;
   color: inherit;

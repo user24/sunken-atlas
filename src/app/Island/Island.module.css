@@ -12,6 +12,10 @@
         padding: 5px;
     }
 }
+.print_editor {
+    background: none;
+    border: 1px solid black;
+}
 @media screen and (max-width: 1024px) {
     .editor {
         height: 425px;

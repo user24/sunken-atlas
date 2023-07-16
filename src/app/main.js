@@ -1,4 +1,4 @@
-import classes from './main.module.css'
+import classNames from './main.module.css'
 import { useState, useEffect } from 'react';
 import Island from './Island';
 import { string2island, island2String } from '@/utils/islandParser/islandParser';
@@ -6,6 +6,7 @@ import islands from './data/islands.json';
 import { IM_Fell_English_SC as Font } from 'next/font/google';
 import Link from 'next/link';
 import { useTheme } from "next-themes";
+import applyTheme from '@/utils/applyTheme';
 
 const font = Font({
   subsets: ['latin'],
@@ -16,19 +17,8 @@ const hostname = 'https://sunkenatlas.com';
 const copyLabels = ['Copy', 'Copied'];
 
 export default function Main({islandString='', loading}) {
-  const { systemTheme, theme, setTheme } = useTheme();
-  const applyTheme = (className) => {
-    const themedClass = classes[`${theme}_${className}`];
-    if (theme && themedClass) {
-      return themedClass;
-    } else {
-      return classes[className];
-    }
-  };
-  const themed = {...classes};
-  Object.keys(classes).forEach(className => {
-    themed[className] = applyTheme(className);
-  });
+  const { theme, setTheme } = useTheme();
+  const classes = applyTheme(theme, classNames);
   const [copyLabel, setCopyLabel] = useState(copyLabels[0]);
   const [tiles, setTiles] = useState(string2island(islandString));
   const link = `${hostname}/i/${island2String(tiles)}`;
@@ -77,7 +67,7 @@ export default function Main({islandString='', loading}) {
   };
 
   return (
-    <div className={themed.wrapper}>
+    <div className={classes.wrapper}>
       <main className={classes.main}>
         <h1 className={[font.className, classes.h1].join(' ')}><Link href='/'>Sunken Atlas</Link></h1>
         <div className={classes.welcome}>the <a target='_blank' href='https://boardgamegeek.com/boardgame/65244/forbidden-island'>Forbidden Island</a> layout editor</div>

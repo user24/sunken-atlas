@@ -1,13 +1,17 @@
-import styles from './Island.module.css';
+import classNames from './Island.module.css';
 import React from 'react';
 import Link from 'next/link';
 import { island2String } from '@/utils/islandParser/islandParser';
+import { useTheme } from "next-themes";
+import applyTheme from '@/utils/applyTheme';
 
 const Island = ({editable, tiles, size,  isLink, name, toggleTile}) => {
+    const { theme } = useTheme();
+    const classes = applyTheme(theme, classNames);
     const code = island2String(tiles);
-    const editorClasses = [styles.editor];
+    const editorClasses = [classes.editor];
     if (size === 's') {
-        editorClasses.push(styles.small);
+        editorClasses.push(classes.small);
     }
 
     const Wrapper = !isLink ? React.Fragment : ({children}) => {
@@ -16,18 +20,18 @@ const Island = ({editable, tiles, size,  isLink, name, toggleTile}) => {
     return (
     <Wrapper>
         <div className={editorClasses.join(' ')}>
-            <div className={styles.inner}>
+            <div className={classes.inner}>
                 {tiles.map((row, y) => (
-                    <div className={styles.tileRow} key={`tile-row-${y}`}>
+                    <div className={classes.tileRow} key={`tile-row-${y}`}>
                         {row.map((cell,x) => {
-                            const classNames = [styles.tile];
+                            const classNames = [classes.tile];
                             if (cell===1) {
-                                classNames.push(styles.filled);
+                                classNames.push(classes.filled);
                             } else if (cell===2) {
-                                classNames.push(styles.impassable);
+                                classNames.push(classes.impassable);
                             }
                             if (size==='s') {
-                                classNames.push(styles.small);
+                                classNames.push(classes.small);
                             }
                             const key = `tile-cell-${y}-${x}`;
                             return <div onClick={editable ? () => toggleTile(x, y) : null} key={key} className={classNames.join(' ')} />

@@ -10,7 +10,7 @@
     /* background-image: linear-gradient(to top, #4dc5d6, #62cdc6, #82d3b4, #a4d6a5, #c6d89d, #d4d08d, #e4c682, #f4bb7d, #f9a36b, #fd8862, #fe6a63, #fc466b); */
 }
 .print_wrapper {
-    background: red;
+    background: none;
 }
 @media screen and (max-width: 1023px) {
     .wrapper {
