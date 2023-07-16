@@ -15,7 +15,7 @@ export default function Layout({ children }) {
         <title>Sunken Atlas</title>
         <meta name="description" content="Alternate tile layouts for the board game Forbidden Island"></meta>
       </Head>
-      <ThemeProvider attribute="theme" themes={['print', 'default']}>
+      <ThemeProvider attribute="theme" themes={['asdsa', '']}>
         <div className={font.className}>{children}</div>
       </ThemeProvider>
     </>
