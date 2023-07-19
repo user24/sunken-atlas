@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "echo *** Remember to stop dev server  & next build",
     "export": "echo Use npm run build instead.",
     "start": "next start",
     "lint": "next lint",
