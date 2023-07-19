@@ -22,8 +22,14 @@ export default function Main({islandString='', loading}) {
   const [copyLabel, setCopyLabel] = useState(copyLabels[0]);
   const [tiles, setTiles] = useState(string2island(islandString));
   const link = `${hostname}/i/${island2String(tiles)}`;
+  const [mounted, setMounted] = useState(false);
   const [islandName, setIslandName] = useState('');
   const getIslandName = islandStr => (islands.find(isle => island2String(isle.tiles) === islandStr) || {name: 'Unknown Isle'}).name;
+  const themeLabel = (theme === 'grey') ? 'Rainbow Mode' : 'Argh! The Colours Burn';
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     setTiles(string2island(islandString));
@@ -91,7 +97,9 @@ export default function Main({islandString='', loading}) {
           <em>
             Islands from <a target='_blank' href='https://boardgamegeek.com/thread/569926/official-variant-tile-layouts/page/1'>BGG</a> &amp; <a target='_blank' href='https://solidred.co.uk'>my imagination</a>. Code on <a target='_blank' href='https://github.com/user24/forbidden-island-editor/'>github</a>.
           </em>
-          <button onClick={() => theme !== "print" ? setTheme('print'): setTheme(" ")}>Toggle Print Mode</button>
+        </p>
+        <p>
+          { mounted && <button onClick={() => theme === " " ? setTheme('grey'): setTheme(" ")}>{themeLabel}</button>}
         </p>
       </section>
     </div>

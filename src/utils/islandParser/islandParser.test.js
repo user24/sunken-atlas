@@ -163,7 +163,7 @@ describe('island-parsing', () => {
     const string = island2String([
       [[1]]
     ]);
-    expect(string).toBe('10-');
+    expect(string).toBe('10-/');
 
     const island = string2island(string);
     expect(island).toEqual([
@@ -297,5 +297,14 @@ describe('island-parsing', () => {
     const str = island2String(island);
     expect(str).toBe('50w0w');
     expect(string2island(str, false)).toEqual(island);
+  });
+  
+  test('adds trailing slash where needed', () => {
+    const island = [
+      [0,0,0,0,1,0,0,0]
+    ];
+    const str = island2String(island);
+    expect(str).toBe('10-/');
+    expect(string2island(str, false)).toEqual([[1]]);
   });
 });

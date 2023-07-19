@@ -82,6 +82,9 @@ const encodeHeader = ({
 const HEADER_LENGTH = 2;
 
 const splitHeader = str => {
+  if (str[str.length - 1] === '/') {
+    str = str.slice(0, -1);
+  }
   const { cols } = decodeHeader(str.slice(0, HEADER_LENGTH));
   const islandChars = str.slice(HEADER_LENGTH).split('');
   return {
@@ -99,7 +102,13 @@ const island2String = (isle) => {
     return row.join('').match(/.{0,6}/g).filter(b => b.length).map(bin => (bin + '000000').slice(0, 6));
   }));
 
-  return encodeHeader({ cols: maxRowLen }) + binary2string(bins.join(''));
+  let islandString = binary2string(bins.join(''));
+
+  if (islandString[islandString.length - 1] === '-') {
+    islandString += '/';
+  }
+
+  return encodeHeader({ cols: maxRowLen }) + islandString;
 };
 
 const string2island = (str, addMoat = true) => {

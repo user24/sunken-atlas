@@ -12,7 +12,7 @@
         padding: 5px;
     }
 }
-.print_editor {
+.grey_editor {
     background: none;
     border: 1px solid black;
 }
@@ -41,6 +41,9 @@
 .tile:not(.small) {
     outline: 1px solid rgba(255,255,255,0.3);
 }
+.grey_tile:not(.small) {
+    outline: 1px solid #aaa;
+}
 .tile.small {
     width: 7px;
     height: 7px;
@@ -48,6 +51,13 @@
 .editor:not(.small) .tile:hover {
     outline: 1px solid #666;
 }
+.grey_editor:not(.small) .tile:hover {
+    outline: 1px solid black;
+}
+
 .filled {
     background: #8F425B;
+}
+.grey_filled {
+    background: #6b6666;
 }

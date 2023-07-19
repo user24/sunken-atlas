@@ -4,7 +4,7 @@ body {
   box-sizing: border-box;
   font-size: 14pt;
 }
-[theme=print] body {
+[theme=grey] body {
   background: none;
 }
 h1 > a {
@@ -19,6 +19,9 @@ input, button {
   padding: 10px;
   font-size: 16px;
   margin: 0;
+}
+[theme=grey] input, [theme=grey] button {
+  border: 1px solid black;
 }
 button {
   padding-left: 20px;
